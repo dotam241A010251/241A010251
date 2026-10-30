@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ẩm Thực Đồng Nai - Hương Vị Đất Phương Nam</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Be Vietnam Pro -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            red: '#B91C1C',      <!-- Đỏ trầm lịch sự -->
+                            orange: '#EA580C',   <!-- Cam ấm áp kích thích vị giác -->
+                            amber: '#D97706',    <!-- Vàng hổ phách đặc trưng -->
+                            green: '#15803D',    <!-- Xanh lá thiên nhiên miệt vườn -->
+                            cream: '#FFFBEB',    <!-- Nền kem ấm áp -->
+                            dark: '#1C1917'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Be Vietnam Pro', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: #FFFBEB;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="text-stone-800 bg-brand-cream antialiased flex flex-col min-h-screen">
+
+    <!-- ================= 1. HEADER & NAVIGATION ================= -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-sm border-b border-amber-200/60 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-red via-brand-orange to-brand-amber flex items-center justify-center text-white text-2xl shadow-md transform hover:rotate-3 transition-transform">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl sm:text-2xl font-black text-brand-red tracking-tight block leading-none">ẨM THỰC</span>
+                        <span class="text-xs font-bold text-brand-green tracking-widest uppercase block mt-1">Đồng Nai Xanh</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu Nav -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-stone-700">
+                    <a href="#hero" class="hover:text-brand-orange transition-colors py-2 border-b-2 border-transparent hover:border-brand-orange">Trang Chủ</a>
+                    <a href="#menu-section" class="hover:text-brand-orange transition-colors py-2 border-b-2 border-transparent hover:border-brand-orange">Đặc Sản Tiêu Biểu</a>
+                    <a href="#locations" class="hover:text-brand-orange transition-colors py-2 border-b-2 border-transparent hover:border-brand-orange">Địa Điểm Ăn Uống</a>
+                    <a href="#reviews" class="hover:text-brand-orange transition-colors py-2 border-b-2 border-transparent hover:border-brand-orange">Góc Đánh Giá</a>
+                    <a href="#footer" class="hover:text-brand-orange transition-colors py-2 border-b-2 border-transparent hover:border-brand-orange">Liên Hệ</a>
+                </nav>
+
+                <!-- Search Quick Button / CTA -->
+                <div class="hidden lg:flex items-center space-x-4">
+                    <a href="#menu-section" class="bg-gradient-to-r from-brand-orange to-brand-red hover:from-amber-600 hover:to-red-700 text-white px-5 py-2.5 rounded-full font-bold shadow-md hover:shadow-lg transition-all flex items-center space-x-2 text-sm">
+                        <i class="fa-solid fa-bowl-food"></i>
+                        <span>Khám Phá Ngay</span>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" type="button" class="text-stone-700 hover:text-brand-orange focus:outline-none p-2 rounded-md">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-amber-100 px-4 pt-2 pb-4 space-y-2 shadow-lg">
+            <a href="#hero" class="mobile-nav-link block px-3 py-2 rounded-xl font-medium text-stone-700 hover:text-brand-orange hover:bg-amber-50">Trang Chủ</a>
+            <a href="#menu-section" class="mobile-nav-link block px-3 py-2 rounded-xl font-medium text-stone-700 hover:text-brand-orange hover:bg-amber-50">Đặc Sản Tiêu Biểu</a>
+            <a href="#locations" class="mobile-nav-link block px-3 py-2 rounded-xl font-medium text-stone-700 hover:text-brand-orange hover:bg-amber-50">Địa Điểm Ăn Uống</a>
+            <a href="#reviews" class="mobile-nav-link block px-3 py-2 rounded-xl font-medium text-stone-700 hover:text-brand-orange hover:bg-amber-50">Góc Đánh Giá</a>
+            <a href="#footer" class="mobile-nav-link block px-3 py-2 rounded-xl font-medium text-stone-700 hover:text-brand-orange hover:bg-amber-50">Liên Hệ</a>
+        </div>
+    </header>
+
+    <!-- ================= 2. HERO BANNER ================= -->
+    <section id="hero" class="relative min-h-[560px] lg:min-h-[640px] flex items-center justify-center bg-stone-900 text-white overflow-hidden">
+        <!-- Background Image with Overlay -->
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1600&auto=format&fit=crop" alt="Ẩm thực Đồng Nai" class="absolute inset-0 w-full h-full object-cover opacity-35 scale-105 transform">
+        
+        <div class="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-900/60 to-transparent"></div>
+
+        <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center my-12 z-10">
+            <span class="inline-flex items-center space-x-2 bg-brand-orange/90 text-white text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full mb-6 tracking-wider uppercase backdrop-blur-sm shadow-md">
+                <i class="fa-solid fa-location-dot"></i>
+                <span>Miền Đông Nam Bộ Trù Phú</span>
+            </span>
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight mb-6 drop-shadow-lg">
+                Hương Vị Độc Đáo <br class="hidden sm:inline"><span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-orange-400 to-red-400">Ẩm Thực Đồng Nai</span>
+            </h1>
+            <p class="text-base sm:text-xl text-stone-200 max-w-2xl mx-auto mb-8 font-light leading-relaxed">
+                Tận hưởng tinh hoa văn hóa ẩm thực từ Bưởi Tân Triều thanh mọng, Gỏi cá Biên Hòa đậm đà đến trái cây Long Khánh sum suê và các món ăn đồng quê trứ danh.
+            </p>
+
+            <!-- Quick Action Links -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#menu-section" class="w-full sm:w-auto bg-gradient-to-r from-brand-orange to-brand-red hover:from-orange-600 hover:to-red-700 text-white font-bold px-8 py-3.5 rounded-full shadow-lg hover:shadow-orange-500/30 transition-all duration-300 transform hover:-translate-y-0.5">
+                    Thưởng Thức Ngay
+                </a>
+                <a href="#locations" class="w-full sm:w-auto bg-white/15 hover:bg-white/25 backdrop-blur-md text-white border border-white/30 font-bold px-8 py-3.5 rounded-full transition-all duration-300">
+                    <i class="fa-solid fa-store mr-2"></i>Quán Ăn Nổi Tiếng
+                </a>
+            </div>
+
+            <!-- Stats Badge -->
+            <div class="grid grid-cols-3 gap-4 max-w-xl mx-auto mt-12 pt-8 border-t border-white/15 text-center">
+                <div>
+                    <span class="block text-2xl sm:text-3xl font-black text-amber-400">100%</span>
+                    <span class="text-xs sm:text-sm text-stone-300">Đặc sản chuẩn vị</span>
+                </div>
+                <div>
+                    <span class="block text-2xl sm:text-3xl font-extrabold text-amber-400">10+</span>
+                    <span class="text-xs sm:text-sm text-stone-300">Món ngon trứ danh</span>
+                </div>
+                <div>
+                    <span class="block text-2xl sm:text-3xl font-extrabold text-amber-400">50+</span>
+                    <span class="text-xs sm:text-sm text-stone-300">Địa chỉ chất lượng</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= 3. FEATURED SPECIALTIES WITH FILTERS ================= -->
+    <section id="menu-section" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Title -->
+        <div class="text-center max-w-3xl mx-auto mb-10">
+            <h2 class="text-xs font-bold text-brand-orange uppercase tracking-widest mb-2">Hương Vị Miền Đông</h2>
+            <p class="text-3xl sm:text-4xl font-black text-stone-900 tracking-tight">Đặc Sản Nổi Bật Đồng Nai</p>
+            <div class="w-20 h-1.5 bg-brand-red mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <!-- Search & Filter Controls -->
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-10 bg-white p-4 rounded-2xl shadow-sm border border-amber-100">
+            <!-- Filter Tabs -->
+            <div class="flex items-center space-x-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 hide-scrollbar" id="category-filters">
+                <button data-category="all" class="filter-btn bg-brand-orange text-white font-semibold px-4 py-2 rounded-xl text-sm whitespace-nowrap transition-all shadow-sm">
+                    Tất Cả Món
+                </button>
+                <button data-category="main" class="filter-btn bg-stone-100 text-stone-700 hover:bg-stone-200 font-semibold px-4 py-2 rounded-xl text-sm whitespace-nowrap transition-all">
+                    Món Chính & Lẩu
+                </button>
+                <button data-category="snack" class="filter-btn bg-stone-100 text-stone-700 hover:bg-stone-200 font-semibold px-4 py-2 rounded-xl text-sm whitespace-nowrap transition-all">
+                    Món Ăn Vặt & Nhắm
+                </button>
+                <button data-category="gift" class="filter-btn bg-stone-100 text-stone-700 hover:bg-stone-200 font-semibold px-4 py-2 rounded-xl text-sm whitespace-nowrap transition-all">
+                    Trái Cây & Quà Biếu
+                </button>
+            </div>
+
+            <!-- Search Input -->
+            <div class="relative w-full md:w-72">
+                <input type="text" id="search-input" placeholder="Tìm tên món ăn..." class="w-full pl-10 pr-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange focus:bg-white transition-all">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-stone-400"></i>
+            </div>
+        </div>
+
+        <!-- Dishes Grid -->
+        <div id="dishes-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Dynamic dish cards rendered via JS -->
+        </div>
+
+        <!-- Empty Search Result -->
+        <div id="no-results" class="hidden text-center py-12">
+            <i class="fa-solid fa-utensils text-5xl text-stone-300 mb-4"></i>
+            <p class="text-xl font-semibold text-stone-600">Không tìm thấy đặc sản phù hợp</p>
+            <p class="text-sm text-stone-400 mt-1">Vui lòng thử tìm kiếm bằng từ khóa khác.</p>
+        </div>
+    </section>
+
+    <!-- ================= 4. DINING LOCATIONS SECTION (CARDS ONLY) ================= -->
+    <section id="locations" class="py-16 bg-gradient-to-b from-amber-100/50 via-orange-50/30 to-amber-50/50 border-y border-amber-200/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-xs font-bold text-brand-orange uppercase tracking-widest mb-2">Thưởng Thức Chuẩn Vị</h2>
+                <p class="text-3xl sm:text-4xl font-black text-stone-900 tracking-tight">Địa Điểm Ăn Uống Nổi Tiếng</p>
+                <p class="text-stone-600 mt-2">Danh sách nhà hàng, quán ăn uy tín hàng đầu được đông đảo du khách đánh giá cao</p>
+            </div>
+
+            <!-- Restaurant Location Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="restaurant-cards-container">
+                <!-- Location cards rendered via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= 5. REVIEWS & FEEDBACK SECTION ================= -->
+    <section id="reviews" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <h2 class="text-xs font-bold text-brand-orange uppercase tracking-widest mb-2">Cảm Nhận Thực Khách</h2>
+            <p class="text-3xl sm:text-4xl font-black text-stone-900 tracking-tight">Góc Đánh Giá & Bình Luận</p>
+            <p class="text-stone-600 mt-2">Chia sẻ trải nghiệm ẩm thực của bạn hoặc tham khảo cảm nhận từ thực khách khác</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <!-- Review Form (5 cols) -->
+            <div class="lg:col-span-5 bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-amber-100">
+                <h3 class="text-xl font-bold text-stone-900 mb-2">Viết Đánh Giá Của Bạn</h3>
+                <p class="text-xs text-stone-500 mb-6">Hãy gửi cảm nhận của bạn về các món ăn đặc sản Đồng Nai nhé!</p>
+
+                <form id="review-form" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-stone-700 mb-1">Họ và Tên</label>
+                        <input type="text" id="reviewer-name" required placeholder="Ví dụ: Nguyễn Văn A" class="w-full px-4 py-2.5 rounded-xl bg-stone-50 border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange focus:bg-white">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-stone-700 mb-1">Món Ăn Đã Thưởng Thức</label>
+                        <select id="reviewer-dish" class="w-full px-4 py-2.5 rounded-xl bg-stone-50 border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange focus:bg-white">
+                            <option value="Gỏi Bưởi Tân Triều">Gỏi Bưởi Tân Triều</option>
+                            <option value="Gỏi Cá Biên Hòa">Gỏi Cá Biên Hòa</option>
+                            <option value="Lẩu Khổ Qua Rừng">Lẩu Khổ Qua Rừng</option>
+                            <option value="Cơm Gà Cá Mặn">Cơm Gà Cá Mặn</option>
+                            <option value="Dế Cơm Chiên Nước Mắm">Dế Cơm Chiên Nước Mắm</option>
+                            <option value="Chả Lụi Bưởi Tân Triều">Chả Lụi Bưởi Tân Triều</option>
+                            <option value="Trái Cây Long Khánh">Trái Cây Long Khánh</option>
+                            <option value="Khác">Đặc sản khác</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-stone-700 mb-1">Đánh Giá (Số Sao)</label>
+                        <div class="flex items-center space-x-2 text-2xl text-amber-400 cursor-pointer" id="star-rating">
+                            <i class="fa-solid fa-star star-icon" data-rating="1"></i>
+                            <i class="fa-solid fa-star star-icon" data-rating="2"></i>
+                            <i class="fa-solid fa-star star-icon" data-rating="3"></i>
+                            <i class="fa-solid fa-star star-icon" data-rating="4"></i>
+                            <i class="fa-solid fa-star star-icon" data-rating="5"></i>
+                        </div>
+                        <input type="hidden" id="selected-rating" value="5">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-stone-700 mb-1">Nội Dung Bình Luận</label>
+                        <textarea id="reviewer-comment" rows="4" required placeholder="Món ăn chuẩn vị thế nào, quán phục vụ ra sao..." class="w-full px-4 py-2.5 rounded-xl bg-stone-50 border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange focus:bg-white"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-gradient-to-r from-brand-orange to-brand-red text-white font-bold py-3 rounded-xl hover:from-orange-600 hover:to-red-700 transition-all shadow-md text-sm">
+                        <i class="fa-solid fa-paper-plane mr-2"></i>Gửi Đánh Giá
+                    </button>
+                </form>
+            </div>
+
+            <!-- Review List Display (7 cols) -->
+            <div class="lg:col-span-7 space-y-4" id="reviews-list">
+                <!-- User reviews dynamically inserted -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= 6. FOOTER ================= -->
+    <footer id="footer" class="bg-stone-900 text-stone-400 mt-auto border-t border-stone-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+                <!-- Col 1: Brand Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-orange to-brand-red flex items-center justify-center text-white text-xl font-bold">
+                            <i class="fa-solid fa-utensils"></i>
+                        </div>
+                        <span class="text-xl font-black text-white tracking-tight">ẨM THỰC ĐỒNG NAI</span>
+                    </div>
+                    <p class="text-sm leading-relaxed text-stone-400">
+                        Cổng thông tin quảng bá văn hóa ẩm thực và đặc sản trứ danh tỉnh Đồng Nai. Nơi kết nối du khách với những hương vị đậm đà phương Nam.
+                    </p>
+                </div>
+
+                <!-- Col 2: Featured Specialties -->
+                <div>
+                    <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Đặc Sản Nổi Tiếng</h4>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><a href="#menu-section" class="hover:text-amber-400 transition-colors"><i class="fa-solid fa-chevron-right text-[10px] mr-2 text-brand-orange"></i>Bưởi Tân Triều</a></li>
+                        <li><a href="#menu-section" class="hover:text-amber-400 transition-colors"><i class="fa-solid fa-chevron-right text-[10px] mr-2 text-brand-orange"></i>Gỏi Cá Biên Hòa</a></li>
+                        <li><a href="#menu-section" class="hover:text-amber-400 transition-colors"><i class="fa-solid fa-chevron-right text-[10px] mr-2 text-brand-orange"></i>Lẩu Khổ Qua Rừng</a></li>
+                        <li><a href="#menu-section" class="hover:text-amber-400 transition-colors"><i class="fa-solid fa-chevron-right text-[10px] mr-2 text-brand-orange"></i>Cơm Gà Cá Mặn</a></li>
+                        <li><a href="#menu-section" class="hover:text-amber-400 transition-colors"><i class="fa-solid fa-chevron-right text-[10px] mr-2 text-brand-orange"></i>Nấm Mối Đồng Nai</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Quick Links -->
+                <div>
+                    <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Liên Kết Nhanh</h4>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><a href="#hero" class="hover:text-amber-400 transition-colors">Trang chủ</a></li>
+                        <li><a href="#menu-section" class="hover:text-amber-400 transition-colors">Đặc sản tiêu biểu</a></li>
+                        <li><a href="#locations" class="hover:text-amber-400 transition-colors">Địa điểm ăn uống</a></li>
+                        <li><a href="#reviews" class="hover:text-amber-400 transition-colors">Góc đánh giá</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Contact Info -->
+                <div>
+                    <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Thông Tin Liên Hệ</h4>
+                    <ul class="space-y-3 text-sm text-stone-400">
+                        <li class="flex items-start space-x-3">
+                            <i class="fa-solid fa-location-dot text-brand-orange mt-1"></i>
+                            <span>TP. Biên Hòa, Tỉnh Đồng Nai, Việt Nam</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-solid fa-envelope text-brand-orange"></i>
+                            <span>lienhe@amthucdongnai.vn</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-solid fa-phone text-brand-orange"></i>
+                            <span>(0251) 3888 999</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-stone-800 pt-8 text-center text-xs text-stone-500">
+                <p>&copy; 2026 Trang Tin Ẩm Thực Tỉnh Đồng Nai. Tất cả quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= DISH DETAIL MODAL ================= -->
+    <div id="dish-modal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative transform transition-all duration-300 scale-95 opacity-0" id="modal-content">
+            <!-- Close Button -->
+            <button id="close-modal" class="absolute top-4 right-4 bg-black/50 hover:bg-black/80 text-white w-10 h-10 rounded-full flex items-center justify-center z-10 transition-colors">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <!-- Modal Image Header -->
+            <div class="relative h-64 sm:h-80 w-full">
+                <img id="modal-img" src="" alt="" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-4 left-6 right-6 text-white">
+                    <span id="modal-category" class="bg-brand-orange text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider"></span>
+                    <h3 id="modal-title" class="text-2xl sm:text-3xl font-black mt-2"></h3>
+                </div>
+            </div>
+
+            <!-- Modal Content Body -->
+            <div class="p-6 space-y-6">
+                <!-- Story -->
+                <div>
+                    <h4 class="text-xs font-bold text-brand-red uppercase tracking-wider mb-2"><i class="fa-solid fa-book-open mr-2"></i>Nguồn Gốc & Câu Chuyện</h4>
+                    <p id="modal-story" class="text-stone-600 leading-relaxed text-sm"></p>
+                </div>
+
+                <!-- Ingredients -->
+                <div class="bg-amber-50 p-4 rounded-2xl border border-amber-100">
+                    <h4 class="text-xs font-bold text-brand-orange uppercase tracking-wider mb-2"><i class="fa-solid fa-carrot mr-2"></i>Nguyên Liệu Đặc Trưng</h4>
+                    <p id="modal-ingredients" class="text-stone-700 font-medium text-sm leading-relaxed"></p>
+                </div>
+
+                <!-- Price & Highlight -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-stone-50 p-3.5 rounded-2xl border border-stone-100">
+                        <span class="text-xs text-stone-500 block">Mức giá trung bình:</span>
+                        <span id="modal-price" class="text-sm sm:text-base font-bold text-brand-red"></span>
+                    </div>
+                    <div class="bg-stone-50 p-3.5 rounded-2xl border border-stone-100">
+                        <span class="text-xs text-stone-500 block">Điểm đặc sắc:</span>
+                        <span id="modal-highlight" class="text-sm sm:text-base font-bold text-brand-green"></span>
+                    </div>
+                </div>
+
+                <!-- Suggested Places -->
+                <div>
+                    <h4 class="text-xs font-bold text-stone-900 uppercase tracking-wider mb-2"><i class="fa-solid fa-store mr-2 text-brand-red"></i>Gợi Ý Quán Ăn Thưởng Thức</h4>
+                    <ul id="modal-locations" class="space-y-2 text-sm text-stone-700"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-stone-900 text-white px-5 py-3 rounded-2xl shadow-xl hidden flex items-center space-x-3 z-50">
+        <i class="fa-solid fa-circle-check text-green-400 text-xl"></i>
+        <span id="toast-message" class="text-sm font-medium">Đã gửi cảm nhận thành công!</span>
+    </div>
+
+    <!-- ================= JAVASCRIPT ================= -->
+    <script>
+        // Data Structure for Dong Nai Specialties
+        const dishes = [
+            {
+                id: 1,
+                name: "Bưởi Tân Triều",
+                category: "gift",
+                categoryName: "Trái Cây & Quà Biếu",
+                price: "70.000đ - 120.000đ / trái",
+                highlight: "Mọng nước, vị ngọt thanh tự nhiên",
+                image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?q=80&w=800&auto=format&fit=crop",
+                shortDesc: "Thương hiệu bưởi trứ danh của vùng cù lao Tân Triều, mọng nước và chế biến được đa dạng món ngon.",
+                story: "Bưởi Tân Triều thuộc cù lao Tân Triều (huyện Vĩnh Cửu) nổi tiếng khắp miền Nam. Nhờ phù sa sông Đồng Nai bồi đắp, bưởi ở đây có vị ngọt đậm, chua nhẹ thanh mát. Bưởi được chế biến thành nhiều sản phẩm đặc sắc như gỏi bưởi, rượu bưởi, chè bưởi và nem bưởi.",
+                ingredients: "Bưởi đường lá cam, bưởi thanh trà tươi ngon nguyên cây.",
+                locations: [
+                    "Làng Bưởi Tân Triều Năm Huệ - Xã Tân Bình, H. Vĩnh Cửu",
+                    "Quán Bưởi Khang - Xã Tân Bình, H. Vĩnh Cửu"
+                ]
+            },
+            {
+                id: 2,
+                name: "Gỏi Cá Biên Hòa",
+                category: "main",
+                categoryName: "Món Chính & Lẩu",
+                price: "150.000đ - 250.000đ / phần",
+                highlight: "Cá sống tươi ngon, béo ngọt không tanh",
+                image: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?q=80&w=800&auto=format&fit=crop",
+                shortDesc: "Đặc sản trứ danh sông Đồng Nai, ăn kèm hơn 10 loại lá rừng và sốt thính riềng nước dùng béo ngậy.",
+                story: "Gỏi cá Biên Hòa dùng cá chép hoặc cá điêu hồng tươi sống xắt mỏng trộn thính. Khi ăn, thực khách cuốn cá cùng hàng chục loại lá rừng như đọt xoài, đinh lăng, lá mơ, lá lốt... rồi chan nước sốt nóng hổi làm từ súp gan cá thơm phức.",
+                ingredients: "Cá tươi sống, thính gạo, riềng, 10-15 loại lá rừng, sốt súp cá cay nồng.",
+                locations: [
+                    "Gỏi Cá Tân Mai - Đường Huỳnh Văn Nghệ, P. Bửu Long, Biên Hòa",
+                    "Gỏi Cá Hoàng Yến - P. Thống Nhất, TP. Biên Hòa"
+                ]
+            },
+            {
+                id: 3,
+                name: "Lẩu Khổ Qua Rừng",
+                category: "main",
+                categoryName: "Món Chính & Lẩu",
+                price: "180.000đ - 280.000đ / nồi",
+                highlight: "Vị đắng đượm hậu ngọt, mát gan giải nhiệt",
+                image: "https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=800&auto=format&fit=crop",
+                shortDesc: "Đọt và lá khổ qua rừng tươi xanh nhúng lẩu sườn non hoặc chả cá thác lác dẻo dai.",
+                story: "Khổ qua rừng mọc nhiều ở đồi núi Đồng Nai. Khác với khổ qua thường, đọt khổ qua rừng nhỏ, vị đắng dịu nhưng hậu ngọt sâu. Nước lẩu ninh ngọt từ sườn heo hoặc cá sông nhúng lá khổ qua tái chín ăn rất lạ miệng và bổ dưỡng.",
+                ingredients: "Đọt lá khổ qua rừng tươi, chả cá thác lác, sườn non, tiêu xanh.",
+                locations: [
+                    "Ẩm Thực Sinh Thái Trị An - Thị trấn Vĩnh An, Vĩnh Cửu",
+                    "Quán Ăn Đồng Quê - Đường Võ Thị Sáu, P. Thống Nhất, Biên Hòa"
+                ]
+            },
+            {
+                id: 4,
+                name: "Cơm Gà Cá Mặn",
+                category: "main",
+                categoryName: "Món Chính & Lẩu",
+                price: "90.000đ - 150.000đ / thố",
+                highlight: "Hạt cơm giòn rụm, thơm nức cá khô & gà xé",
+                image: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?q=80&w=800&auto=format&fit=crop",
+                shortDesc: "Cơm chiên trong thố đất giữ độ nóng hổi, hòa quyện vị mặn mòi của cá khô và thịt gà xé phay.",
+                story: "Cơm gà cá mặn là món ăn dân dã đặc trưng của Biên Hòa - Đồng Nai. Cơm được nấu cùng gà xé nhỏ, cá khô mặn xé sợi rồi chiên giòn thơm lừng trong thố đất gốm nung. Món ăn có lớp cháy xém giòn rụm ở đáy thố rất hấp dẫn.",
+                ingredients: "Gạo thơm, thịt gà xé, cá khô mặn, hành tỏi, ngò rí, gia vị gia truyền.",
+                locations: [
+                    "Nhà Hàng Cơm Niêu Đồng Nai - P. Tân Tiến, TP. Biên Hòa",
+                    "Quán Cơm Niêu Nam Bộ - P. Bửu Long, TP. Biên Hòa"
+                ]
+            },
+            {
+                id: 5,
+                name: "Nấm Mối Đồng Nai",
+                category: "gift",
+                categoryName: "Trái Cây & Quà Biếu",
+                price: "350.000đ - 650.000đ / kg (theo mùa)",
+                highlight: "Quà tặng tự nhiên, độ ngọt tự nhiên hiếm có",
+                image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=800&auto=format&fit=crop",
+                shortDesc: "Đặc sản thiên nhiên mọc đầu mùa mưa, chế biến nướng giấy bạc, xào mỡ hành hay nấu cháo đều tuyệt vời.",
+                story: "Nấm mối chỉ xuất hiện tự nhiên trên các ổ mối đất vào đầu mùa mưa (tháng 5 - 6 âm lịch). Đất đỏ bazan Đồng Nai là thủ phủ của loại nấm mối ngon nhất, thịt nấm giòn, ngọt lịm ngọt hơn cả thịt gà.",
+                ingredients: "Nấm mối búp tươi, hành tím, mỡ hành, muối ớt hột.",
+                locations: [
+                    "Nhà Hàng Quê Nhà - Quốc lộ 1A, TP. Long Khánh",
+                    "Chợ Long Khánh & Chợ Biên Hòa (Vào mùa tháng 5-6 âm lịch)"
+                ]
+            },
+            {
+                id: 6,
+                name: "Dế Cơm Chiên Nước Mắm",
+                category: "snack",
+                categoryName: "Món Ăn Vặt & Nhắm",
+                price: "80.000đ - 130.000đ / dĩa",
+                highlight: "Giòn rụm, béo bùi, thơm nức vị nước mắm",
+                image: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?q=80&w=800&auto=format&fit=crop",
+                shortDesc: "Dế cơm béo ngậy nhồi hạt đậu phụng rang bên trong, chiên ngập dầu rồi đảo nước mắm tỏi ớt thơm lừng.",
+                story: "Đặc sản độc đáo của vùng miệt vườn Long Khánh - Đồng Nai. Dế cơm mùa mưa mập mạp được làm sạch, nhét hạt đậu phụng vào bụng rồi chiên vàng ruộm, nhắm cùng bia lạnh thì tuyệt không gì bằng.",
+                ingredients: "Dế cơm mập béo, đậu phụng rang, nước mắm tỏi ớt, bơ.",
+                locations: [
+                    "Các quán ẩm thực sân vườn TP. Long Khánh, Đồng Nai",
+                    "Quán Ăn Đồng Quê Cẩm Mỹ - Huyện Cẩm Mỹ, Đồng Nai"
+                ]
+            },
+            {
+                id: 7,
+                name: "Chả Lụi Bưởi Tân Triều",
+                category: "snack",
+                categoryName: "Món Ăn Vặt & Nhắm",
+                price: "35.000đ - 50.000đ / phần",
+                highlight: "Bánh giòn rụm, sốt tương đậu béo ngậy",
+                image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?q=80&w=800&auto=format&fit=crop",
+                shortDesc: "Món ăn vặt trứ danh học sinh sinh viên Biên Hòa, nhân tôm thịt nướng than hồng ăn kèm rau sống.",
+                story: "Chả lụi Biên Hòa được làm từ tôm thịt quết nhẵn, gói trong xiên bánh tráng mỏng rồi nướng trên bếp than hồng cho giòn tan. Điểm đặc trưng là nước chấm tương đậu phộng sánh mịn, chua ngọt đậm đà.",
+                ingredients: "Bánh tráng, tôm thịt tươi, rau sống, xoài bào, sốt tương đậu phộng.",
+                locations: [
+                    "Chả Lụi Huỳnh Văn Nghệ - P. Bửu Long, TP. Biên Hòa",
+                    "Chả Lụi Bửu Long - Gần KDL Bửu Long, TP. Biên Hòa"
+                ]
+            }
+        ];
+
+        // Restaurant Locations Data Cards
+        const restaurants = [
+            {
+                name: "Khu Du Lịch Làng Bưởi Tân Triều Năm Huệ",
+                address: "Xã Tân Bình, Huyện Vĩnh Cửu, Tỉnh Đồng Nai",
+                phone: "0251 3896 222",
+                openHours: "07:30 - 21:00 hàng ngày",
+                dishes: "Gỏi bưởi, Rượu bưởi, Chè bưởi, Nem bưởi",
+                badge: "Nổi tiếng nhất"
+            },
+            {
+                name: "Nhà Hàng Gỏi Cá Tân Mai",
+                address: "Đường Huỳnh Văn Nghệ, P. Bửu Long, TP. Biên Hòa",
+                phone: "0918 234 567",
+                openHours: "09:00 - 22:00 hàng ngày",
+                dishes: "Gỏi cá chép, cá điêu hồng tươi sống",
+                badge: "Chuẩn vị Biên Hòa"
+            },
+            {
+                name: "Quán Cơm Niêu Đồng Nai",
+                address: "Đường Võ Thị Sáu, P. Tân Tiến, TP. Biên Hòa",
+                phone: "0251 3822 888",
+                openHours: "10:00 - 21:30 hàng ngày",
+                dishes: "Cơm gà cá mặn, Lẩu khổ qua rừng, Cá kho tộ",
+                badge: "Không gian sang trọng"
+            },
+            {
+                name: "Vườn Trái Cây Sinh Thái Bình Lộc",
+                address: "Xã Bình Lộc, TP. Long Khánh, Tỉnh Đồng Nai",
+                phone: "0933 888 999",
+                openHours: "07:00 - 18:00 hàng ngày",
+                dishes: "Sầu riêng, Chôm chôm, Dế chiên nước mắm",
+                badge: "Trải nghiệm miệt vườn"
+            },
+            {
+                name: "Nhà Hàng Ẩm Thực Sinh Thái Trị An",
+                address: "Thị trấn Vĩnh An, Huyện Vĩnh Cửu, Đồng Nai",
+                phone: "0251 3861 111",
+                openHours: "08:00 - 21:00 hàng ngày",
+                dishes: "Lẩu khổ qua rừng, Cá lăng sông Trị An",
+                badge: "View sông mát mẻ"
+            },
+            {
+                name: "Chả Lụi Huỳnh Văn Nghệ",
+                address: "Đường Huỳnh Văn Nghệ, P. Bửu Long, TP. Biên Hòa",
+                phone: "0908 123 456",
+                openHours: "14:00 - 21:00 hàng ngày",
+                dishes: "Chả lụi giòn rụm, Nem nướng, Ăn vặt",
+                badge: "Ăn vặt cực ngon"
+            }
+        ];
+
+        // Sample User Reviews
+        let initialReviews = [
+            {
+                name: "Lê Minh Tuấn",
+                dish: "Gỏi Bưởi Tân Triều",
+                rating: 5,
+                time: "2 ngày trước",
+                comment: "Gỏi bưởi ngon tuyệt vời! Vị chua thanh của bưởi hòa quyện với tôm sông ngọt lịm. Khung cảnh làng bưởi Tân Triều rất mát mẻ thích hợp đi chơi cuối tuần."
+            },
+            {
+                name: "Trần Thị Mai",
+                dish: "Gỏi Cá Biên Hòa",
+                rating: 5,
+                time: "5 ngày trước",
+                comment: "Mới đầu thấy cá sống hơi ái ngại nhưng ăn thử thì mê luôn. Cá không hề tanh, ăn kèm đọt xoài với lá rừng chan sốt cá cay nóng hổi cực đỉnh!"
+            },
+            {
+                name: "Nguyễn Hoàng Nam",
+                dish: "Cơm Gà Cá Mặn",
+                rating: 4,
+                time: "1 tuần trước",
+                comment: "Cơm chiên thố đất giòn rụm, vị cá mặn vừa vặn ăn bắt miệng lắm. Quán phục vụ nhanh nhẹn nhiệt tình."
+            }
+        ];
+
+        // DOM Elements
+        const dishesGrid = document.getElementById('dishes-grid');
+        const noResults = document.getElementById('no-results');
+        const searchInput = document.getElementById('search-input');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const restaurantContainer = document.getElementById('restaurant-cards-container');
+        const reviewsList = document.getElementById('reviews-list');
+
+        // Modal Elements
+        const modal = document.getElementById('dish-modal');
+        const modalContent = document.getElementById('modal-content');
+        const closeModalBtn = document.getElementById('close-modal');
+        const modalImg = document.getElementById('modal-img');
+        const modalCategory = document.getElementById('modal-category');
+        const modalTitle = document.getElementById('modal-title');
+        const modalStory = document.getElementById('modal-story');
+        const modalIngredients = document.getElementById('modal-ingredients');
+        const modalPrice = document.getElementById('modal-price');
+        const modalHighlight = document.getElementById('modal-highlight');
+        const modalLocations = document.getElementById('modal-locations');
+
+        let currentCategory = 'all';
+        let currentSearchQuery = '';
+
+        // Render Dishes Grid
+        function renderDishes() {
+            const filtered = dishes.filter(dish => {
+                const matchesCategory = currentCategory === 'all' || dish.category === currentCategory;
+                const matchesSearch = dish.name.toLowerCase().includes(currentSearchQuery.toLowerCase()) || 
+                                      dish.shortDesc.toLowerCase().includes(currentSearchQuery.toLowerCase());
+                return matchesCategory && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                dishesGrid.classList.add('hidden');
+                noResults.classList.remove('hidden');
+            } else {
+                dishesGrid.classList.remove('hidden');
+                noResults.classList.add('hidden');
+                
+                dishesGrid.innerHTML = filtered.map(dish => `
+                    <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-amber-100 flex flex-col group">
+                        <div class="relative overflow-hidden h-52">
+                            <img src="${dish.image}" alt="${dish.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-brand-red text-xs font-bold px-3 py-1 rounded-full shadow-sm">
+                                ${dish.categoryName}
+                            </span>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <h3 class="text-xl font-extrabold text-stone-900 group-hover:text-brand-orange transition-colors mb-2">${dish.name}</h3>
+                                <p class="text-stone-600 text-sm line-clamp-2 mb-4 leading-relaxed">${dish.shortDesc}</p>
+                            </div>
+                            <div>
+                                <div class="flex items-center justify-between pt-4 border-t border-stone-100 text-xs text-stone-500 mb-4">
+                                    <span class="font-bold text-brand-green"><i class="fa-solid fa-star text-amber-400 mr-1"></i>${dish.highlight}</span>
+                                </div>
+                                <button onclick="openModal(${dish.id})" class="w-full bg-amber-50 hover:bg-brand-orange hover:text-white text-brand-orange font-bold py-2.5 rounded-xl transition-all duration-300 text-sm flex items-center justify-center space-x-2">
+                                    <span>Xem Chi Tiết & Nơi Bán</span>
+                                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Render Restaurant Cards
+        function renderRestaurants() {
+            restaurantContainer.innerHTML = restaurants.map(res => `
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-amber-100/80 hover:shadow-md hover:border-brand-orange/40 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="bg-amber-100 text-amber-800 text-[11px] font-bold px-2.5 py-1 rounded-full">${res.badge}</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-stone-900 mb-2 leading-snug">${res.name}</h3>
+                        
+                        <div class="space-y-2 text-xs text-stone-600 mb-4">
+                            <p class="flex items-start"><i class="fa-solid fa-location-dot text-brand-red w-4 mt-0.5"></i> <span>${res.address}</span></p>
+                            <p class="flex items-center"><i class="fa-solid fa-phone text-brand-orange w-4"></i> <span class="font-semibold">${res.phone}</span></p>
+                            <p class="flex items-center"><i class="fa-solid fa-clock text-brand-green w-4"></i> <span>${res.openHours}</span></p>
+                        </div>
+                    </div>
+                    <div class="pt-3 border-t border-stone-100">
+                        <span class="text-xs text-stone-500 block font-medium">Đặc sản nổi tiếng:</span>
+                        <span class="text-xs font-bold text-brand-red">${res.dishes}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Render User Reviews List
+        function renderReviews() {
+            reviewsList.innerHTML = initialReviews.map(rev => {
+                let starsHtml = '';
+                for (let i = 1; i <= 5; i++) {
+                    starsHtml += `<i class="fa-solid fa-star ${i <= rev.rating ? 'text-amber-400' : 'text-stone-200'}"></i>`;
+                }
+
+                return `
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-amber-100 flex space-x-4">
+                        <div class="w-11 h-11 rounded-full bg-gradient-to-br from-brand-orange to-brand-amber text-white font-bold flex items-center justify-center text-base flex-shrink-0">
+                            ${rev.name.charAt(0)}
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between mb-1">
+                                <h4 class="font-bold text-stone-900 text-sm">${rev.name}</h4>
+                                <span class="text-[11px] text-stone-400">${rev.time}</span>
+                            </div>
+                            <div class="flex items-center space-x-2 mb-2">
+                                <div class="flex text-xs space-x-0.5">${starsHtml}</div>
+                                <span class="text-xs font-semibold text-brand-orange bg-orange-50 px-2 py-0.5 rounded-md">${rev.dish}</span>
+                            </div>
+                            <p class="text-stone-600 text-xs sm:text-sm leading-relaxed">${rev.comment}</p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Open Modal Details
+        window.openModal = function(id) {
+            const dish = dishes.find(d => d.id === id);
+            if (!dish) return;
+
+            modalImg.src = dish.image;
+            modalCategory.textContent = dish.categoryName;
+            modalTitle.textContent = dish.name;
+            modalStory.textContent = dish.story;
+            modalIngredients.textContent = dish.ingredients;
+            modalPrice.textContent = dish.price;
+            modalHighlight.textContent = dish.highlight;
+
+            modalLocations.innerHTML = dish.locations.map(loc => `
+                <li class="flex items-start space-x-2 bg-stone-50 p-3 rounded-xl border border-stone-100">
+                    <i class="fa-solid fa-store text-brand-orange mt-0.5"></i>
+                    <span>${loc}</span>
+                </li>
+            `).join('');
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close Modal
+        function closeModal() {
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 200);
+        }
+
+        closeModalBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        // Filter Category Click Handle
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-brand-orange', 'text-white', 'shadow-sm');
+                    b.classList.add('bg-stone-100', 'text-stone-700');
+                });
+                btn.classList.remove('bg-stone-100', 'text-stone-700');
+                btn.classList.add('bg-brand-orange', 'text-white', 'shadow-sm');
+
+                currentCategory = btn.getAttribute('data-category');
+                renderDishes();
+            });
+        });
+
+        // Search Input Handle
+        searchInput.addEventListener('input', (e) => {
+            currentSearchQuery = e.target.value.trim();
+            renderDishes();
+        });
+
+        // Star Rating Selection Handle
+        const starIcons = document.querySelectorAll('#star-rating .star-icon');
+        const selectedRatingInput = document.getElementById('selected-rating');
+
+        starIcons.forEach(star => {
+            star.addEventListener('click', () => {
+                const rating = parseInt(star.getAttribute('data-rating'));
+                selectedRatingInput.value = rating;
+
+                starIcons.forEach((s, idx) => {
+                    if (idx < rating) {
+                        s.classList.remove('text-stone-200');
+                        s.classList.add('text-amber-400');
+                    } else {
+                        s.classList.remove('text-amber-400');
+                        s.classList.add('text-stone-200');
+                    }
+                });
+            });
+        });
+
+        // Review Form Submit Handle
+        const reviewForm = document.getElementById('review-form');
+        const toast = document.getElementById('toast');
+
+        reviewForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('reviewer-name').value;
+            const dishName = document.getElementById('reviewer-dish').value;
+            const rating = parseInt(selectedRatingInput.value);
+            const comment = document.getElementById('reviewer-comment').value;
+
+            // Add new review to list
+            initialReviews.unshift({
+                name: name,
+                dish: dishName,
+                rating: rating,
+                time: "Vừa xong",
+                comment: comment
+            });
+
+            renderReviews();
+            reviewForm.reset();
+
+            // Reset stars back to 5
+            starIcons.forEach(s => {
+                s.classList.remove('text-stone-200');
+                s.classList.add('text-amber-400');
+            });
+            selectedRatingInput.value = 5;
+
+            // Show Toast Notification
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Initial Load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderDishes();
+            renderRestaurants();
+            renderReviews();
+        });
+    </script>
+</body>
+</html>
